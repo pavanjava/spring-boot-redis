@@ -10,8 +10,8 @@ public interface OrderService {
     Order save(Order order);
     List<Order> findAll();
 
-    Order findOrderById(UUID id);
+    Order findOrderById(int id);
     List<Order> findOrderByCustomerId(String customerId);
 
-    Order delete(UUID id);
+    Order delete(int id);
 }

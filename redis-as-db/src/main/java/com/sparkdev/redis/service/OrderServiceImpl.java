@@ -4,21 +4,25 @@ import com.sparkdev.redis.dao.OrderDaoImpl;
 import com.sparkdev.redis.entity.Order;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
     private final OrderDaoImpl orderDao;
-
+    private SecureRandom secureRandom;
     public OrderServiceImpl(OrderDaoImpl orderDao) {
         this.orderDao = orderDao;
+        this.secureRandom = new SecureRandom();
+        secureRandom.setSeed(46);
+        System.setProperty("java.util.secureRandomSeed", "true");
     }
 
     @Override
     public Order save(Order order) {
-        order.setId(UUID.randomUUID());
+
+        order.setId(Math.abs(secureRandom.nextInt()));
         double amt = order.getProductPurchase().values().stream().reduce(0.0, Double::sum);
         double tax = (amt * order.getTax()) / 100;
         order.setOrderAmount(amt);
@@ -34,8 +38,8 @@ public class OrderServiceImpl implements OrderService {
 
     // Intentionally left blank for you to implement
     @Override
-    public Order findOrderById(UUID id) {
-        return null;
+    public Order findOrderById(int id) {
+        return this.orderDao.findById(id).orElse(new Order());
     }
 
     @Override
@@ -44,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order delete(UUID id) {
+    public Order delete(int id) {
         return null;
     }
 }

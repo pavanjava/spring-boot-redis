@@ -16,7 +16,7 @@ import java.util.UUID;
 @RedisHash("Order")
 public class Order implements Serializable {
     @Id
-    private UUID id;
+    private int id;
     private String customerId;
     private Map<String, Double> productPurchase;
     private double orderAmount;

@@ -1,7 +1,6 @@
 package com.sparkdev.redis.controller;
 
 import com.sparkdev.redis.entity.Order;
-import com.sparkdev.redis.dao.OrderDaoImpl;
 import com.sparkdev.redis.service.OrderService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +17,18 @@ public class OrderController {
     }
 
     @PostMapping("/order")
-    public Order saveOrder(@RequestBody  Order order){
-        return  this.orderService.save(order);
+    public Order saveOrder(@RequestBody Order order) {
+        return this.orderService.save(order);
     }
 
     @GetMapping("/order")
-    public List<Order> findAllOrders(){
+    public List<Order> findAllOrders() {
         return this.orderService.findAll();
     }
+
+    @GetMapping("/order/{id}")
+    public Order findOrderById(@PathVariable int id) {
+        return this.orderService.findOrderById(id);
+    }
+
 }
