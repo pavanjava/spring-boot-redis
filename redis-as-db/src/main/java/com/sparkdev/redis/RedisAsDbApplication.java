@@ -6,10 +6,10 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 
 @SpringBootApplication(scanBasePackages = "com.sparkdev.redis")
 @EnableRedisRepositories
-public class RedisAsCacheApplication {
+public class RedisAsDbApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(RedisAsCacheApplication.class, args);
+        SpringApplication.run(RedisAsDbApplication.class, args);
     }
 
 }
